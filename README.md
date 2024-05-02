@@ -1,3 +1,46 @@
+ I have transferred the changes over to the updated 118 version of the library.
+
+https://github.com/tonyxqing/react-native-webrtc/
+
+instead of
+
+getUserMedia(
+  constraints,
+  stream => { this.localStream = stream }
+)
+
+const takePictureOptions = {
+  captureTarget: MediaStreamTrack.constants.captureTarget.temp, // memory, temp, disk or cameraRoll
+  maxSize: 2000,
+  maxJpegQuality: 1.0,
+  streamId: this.localStream.getVideoTracks().filter(track => track.kind === 'video')[0].id,
+}
+
+MediaStreamTrack.takePicture(
+  takePictureOptions,
+  photoPath => { /* do something */ }
+)
+it would be
+
+getUserMedia(
+  constraints,
+  stream => { setLocalStream(stream) }
+)
+
+const takePictureOptions = {
+  captureTarget: MediaStreamTrack.constants.captureTarget.temp, // memory, temp, disk or cameraRoll
+  maxSize: 2000,
+  maxJpegQuality: 1.0,
+  streamId: localStream.getVideoTracks().filter(track => track.kind === 'video')[0].id,
+}
+
+localStream.getVideoTracks()[0].takePicture(
+  takePictureOptions,
+  photoPath => { /* do something */ }
+)
+I've only implemented it for iOS though.
+
+
 [<img src="https://avatars.githubusercontent.com/u/42463376" alt="React Native WebRTC" style="height: 6em;" />](https://github.com/react-native-webrtc/react-native-webrtc)
 
 # React-Native-WebRTC
