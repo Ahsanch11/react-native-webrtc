@@ -4,40 +4,40 @@ https://github.com/tonyxqing/react-native-webrtc/
 
 instead of
 
-getUserMedia(
+`getUserMedia(
   constraints,
   stream => { this.localStream = stream }
-)
+)`
 
-const takePictureOptions = {
+`const takePictureOptions = {
   captureTarget: MediaStreamTrack.constants.captureTarget.temp, // memory, temp, disk or cameraRoll
   maxSize: 2000,
   maxJpegQuality: 1.0,
   streamId: this.localStream.getVideoTracks().filter(track => track.kind === 'video')[0].id,
-}
+}`
 
-MediaStreamTrack.takePicture(
+`MediaStreamTrack.takePicture(
   takePictureOptions,
   photoPath => { /* do something */ }
-)
+)`
 it would be
 
-getUserMedia(
+`getUserMedia(
   constraints,
   stream => { setLocalStream(stream) }
-)
+)`
 
-const takePictureOptions = {
+`const takePictureOptions = {
   captureTarget: MediaStreamTrack.constants.captureTarget.temp, // memory, temp, disk or cameraRoll
   maxSize: 2000,
   maxJpegQuality: 1.0,
   streamId: localStream.getVideoTracks().filter(track => track.kind === 'video')[0].id,
-}
+}`
 
-localStream.getVideoTracks()[0].takePicture(
+`localStream.getVideoTracks()[0].takePicture(
   takePictureOptions,
   photoPath => { /* do something */ }
-)
+)`
 I've only implemented it for iOS though.
 
 
